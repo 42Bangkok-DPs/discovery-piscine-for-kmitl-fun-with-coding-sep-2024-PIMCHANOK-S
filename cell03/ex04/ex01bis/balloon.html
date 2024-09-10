@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Balloon</title>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100vh; /* 100vh แทน 100dvh */
+    }
+
+    .balloon {
+      height: 200px;
+      width: 200px;
+      background-color: red;
+      border-radius: 100%;
+      transition: all 0.125s;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="balloon" id="balloon"></div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      const balloon = $("#balloon");
+      var width = balloon.width();
+      var height = balloon.height();
+
+      let click = 0;
+      let colors = ["red", "green", "blue"];
+
+      function setSize(w, h) {
+        balloon.css({
+          width: w + "px",
+          height: h + "px"
+        });
+      };
+
+      balloon.on("click", function() {
+        if (width < 415 && height < 415) {
+          width += 10;
+          height += 10;
+          setSize(width, height);
+        } else {
+          width = 200;
+          height = 200;
+          setSize(width, height);
+        }
+
+        if (click == 2) {
+          click = 0;
+        } else {
+          click += 1;
+        }
+        balloon.css("background-color", colors[click]);
+      });
+
+      balloon.on("mouseleave", function() {
+        if (click == 0) {
+          click = 2;
+        } else {
+          click -= 1;
+        }
+        balloon.css("background-color", colors[click]);
+
+        if (width == 200 || height == 200) return;
+        width -= 5;
+        height -= 5;
+        setSize(width, height);
+      });
+    });
+  </script>
+</body>
+</html>

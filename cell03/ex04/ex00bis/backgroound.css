@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    transition: all 0.125s;
+  }
+  
+button {
+    width: 5%;
+    height: 50px;
+    margin: 10px;
+    border-radius: 50px;
+    font-weight: bold;
+    padding: 0.25rem;
+    background-color: rgb(131, 131, 131);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+}
+  
+  

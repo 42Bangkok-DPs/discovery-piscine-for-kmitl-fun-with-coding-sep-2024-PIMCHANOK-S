@@ -1,0 +1,17 @@
+<html></html>
+<head>
+    <link rel="stylesheet" href="backgroound.css">
+</head>
+<body>
+    <button class="btn_changeBG" onclick="changeBG()">Change BG</button>
+</body>
+<script>
+    function changeBG(){
+        let rHex = Math.floor(Math.random()*255).toString(16);
+        let gHex = Math.floor(Math.random()*255).toString(16);
+        let bHex = Math.floor(Math.random()*255).toString(16);
+
+        document.body.bgColor = "#"+rHex+gHex+bHex;
+    }
+</script>
+</html>
