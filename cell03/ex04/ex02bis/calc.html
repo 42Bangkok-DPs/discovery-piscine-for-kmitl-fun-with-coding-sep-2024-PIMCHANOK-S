@@ -8,7 +8,10 @@
     <style>
         .container {
             width: 100%;
-            height: 100vh; /* แก้เป็น 100vh แทน 100dvh */
+            height: 100vh; /* แก้เป็น 100vh แทน 100dvh 
+            vh หมายถึง 1% ของความสูงของ viewport (หน้าต่างเบราว์เซอร์) 
+            ตัวอย่างเช่น 100vh หมายถึงองค์ประกอบจะมีความสูงเท่ากับ 100% ของความสูงของหน้าต่างเบราว์เซอร์
+            dvh หมายถึง 1% ของความสูงของ viewport ที่เปลี่ยนแปลงแบบไดนามิก หน่วยนี้จะปรับขนาดตามการเปลี่ยนแปลงของ UI ในเบราว์เซอร์*/
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -68,27 +71,35 @@
                 alert("Please, use me...");
             }, 30000);
 
-            $("#calBtn").click(function() {
-                console.log(val1.val(), val2.val())
-                const value1 = (val1.val());
-                const value2 = (val2.val());
+            $("#calBtn").click(function(e) {
+                e.preventDefault(); // ป้องกันไม่ให้ฟอร์มรีเฟรชหน้า
+
+                const value1 = parseFloat(val1.val());
+                const value2 = parseFloat(val2.val());
                 const opar = op.val();
 
-                if (parseInt(value1) < 0 || parseInt(value2) < 0 || isNaN(value1) || isNaN(value2)) {
+                // ตรวจสอบว่าเป็นจำนวนเต็มไหม
+                if (!Number.isInteger(value1) || !Number.isInteger(value2)) {
+                    console.log("Error: Decimal numbers are not allowed.");
+                    alert("Error: Decimal numbers are not allowed.");
+                    return;
+                }
+
+                if (value1 < 0 || value2 < 0 || isNaN(value1) || isNaN(value2)) {
                     console.log("Error :(");
                     alert("Error :(");
                     return;
                 }
 
-                if ((opar == "/" || opar == "%") && (value2 == 0)) {
-                    console.log("It's over 9000!")
+                if ((opar == "/" || opar == "%") && value2 == 0) {
+                    console.log("It's over 9000!");
                     alert("It's over 9000!");
                     return;
                 }
                 
-                console.log(eval(`${value1} ${opar} ${value2}`))
-                alert("Result : " + eval(`${value1} ${opar} ${value2}`));
-                
+                const result = eval(`${value1} ${opar} ${value2}`);
+                console.log(result);
+                alert("Result : " + result);
             });
         });
     </script>
